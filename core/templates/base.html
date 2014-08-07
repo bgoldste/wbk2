@@ -1,52 +1,58 @@
-<!doctype html>
-{% load compress %}
+<!DOCTYPE html>
+<html lang="en"><head>
 
-{% comment %} paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ {% endcomment %}
-<!--[if lt IE 7]> <html class="lt-ie10 lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="lt-ie10 lt-ie9 lt-ie8" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="lt-ie10 lt-ie9" lang="en"> <![endif]-->
-<!--[if IE 9]>    <html class="lt-ie10" lang="en"> <![endif]-->
-<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-    <title></title>
 
-    {% compress css %}
-        {% comment %} Core CSS includes (for inclusion on all pages) {% endcomment %}
+    <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    
 
-    {% endcompress %}
-
-    {% compress css %}
-        {% comment %}
-            Per-page CSS is compressed separately so that the global stuff doesn't get re-downloaded each time 
-        {% endcomment %}
-        {% block extra_css %}{% endblock %}
-    {% endcompress %}
 
 </head>
-<body>
+
+
+
+
+  <body>
+
+   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand " href="#">WaveBook</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="/trestles">Trestles</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+
     {% block content %}{% endblock %}
 
-    {% comment %}
-        JavaScript at the bottom for fast page loading:
-        http://developer.yahoo.com/performance/rules.html#js_bottom
-    {% endcomment %}
 
-    {% compress js %}
-        {% comment %}
-            Core JS includes (for inclusion on all pages) to be specified here
-        {% endcomment %}
-        <script src="{{ STATIC_URL }}js/jquery-1.9.1.js"></script>
-        <p>welcome to wavebook</p>
-    {% endcompress %}
 
-    {% compress js %}
-        {% comment %}
-            Per-page JS is compressed separately so that the global stuff doesn't get re-downloaded each time 
-        {% endcomment %}
-        {% block extra_js %}{% endblock %}
-    {% endcompress %}
+      <footer>
+        <p>&copy; Company 2014</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+
+
+
+   <script src="{{ STATIC_URL }}core/js/jquery.min.js" ></script>
+
+   <script src="{{ STATIC_URL }}core/js/bootstrap.js"></script>
+
+
+
 </body>
-</html>

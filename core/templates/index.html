@@ -1,3 +1,66 @@
-<body>
-<p>hi leo</p>
-</body>
+{% extends "base.html" %}
+
+{% block content %}
+<div class ="jumbotron">
+<h1>Welcome to Wavebook! We're under construction.</h1>
+</div>
+
+
+<div class="row text-center">
+            <div class="col-6 col-sm-6 col-lg-6">
+           
+    
+        <img src="{{ STATIC_URL }}images/wave1.jpg">
+
+      <div class="caption">
+         <p>Courtesy o123123f Joe Photog.</p>   
+      </div>
+          <h2>5/11/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="/trestles" role="button">Go To Spot&raquo;</a></p>
+            </div><!--/span-->
+
+           <div class="col-6 col-sm-6 col-lg-6">
+           
+            
+          <img src="{{ STATIC_URL }}images/wave1.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/12/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div>
+
+          <div class="row text-center">
+          <div class="col-6 col-sm-6 col-lg-6">
+           
+         
+          <img src="{{ STATIC_URL }}images/wave3.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/13/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span--><div class="col-6 col-sm-6 col-lg-6">
+           
+            
+          <img src="{{ STATIC_URL }}images/wave4.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/14/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div>
+{% endblock %}
