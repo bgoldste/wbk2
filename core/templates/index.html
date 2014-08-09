@@ -4,6 +4,13 @@
 <div class ="jumbotron">
 <h1>Welcome to Wavebook! We're under construction.</h1>
 </div>
+<div class = "jumbotron">
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+</div>
 
 
 <div class="row text-center">
