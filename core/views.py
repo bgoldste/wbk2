@@ -6,18 +6,15 @@ from django.views.generic import CreateView
 from forms import EmailForm
 from django import forms
 from core.models import Subscriber
+from django.contrib.messages.views import SuccessMessageMixin
 
-
-class HomePageView(CreateView):
+class HomePageView(SuccessMessageMixin, CreateView):
     template_name = "index.html"
     form_class = EmailForm
     model = Subscriber
     success_url = '/'
-    success_message = "Email saved successfully"
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-       
-        return super(HomePageView, self).form_valid(form)
-
+    success_message = "Thanks for being a part of Wavebook. We'll be in touch soon"
+  
+    def get_success_message(self, cleaned_data):
+        return self.success_message 
 
