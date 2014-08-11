@@ -4,6 +4,8 @@
 
 
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+     <link href="{{ STATIC_URL }}css/grayscale.css" rel="stylesheet">
+
     <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -24,44 +26,21 @@
 
   <body>
 
-   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand " href="#">WaveBook</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="/trestles">Trestles</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
-
 
     {% block content %}{% endblock %}
 
 
 
-      <footer>
-        <p>&copy; Company 2014</p>
-      </footer>
+  
     </div> <!-- /container -->
 
 
 
 
 
-   <script src="{{ STATIC_URL }}core/js/jquery.min.js" ></script>
+   <script src="{{ STATIC_URL }}js/jquery.min.js" ></script>
 
-   <script src="{{ STATIC_URL }}core/js/bootstrap.js"></script>
+   <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
 
 
 

@@ -12,8 +12,8 @@ class HomePageView(SuccessMessageMixin, CreateView):
     template_name = "index.html"
     form_class = EmailForm
     model = Subscriber
-    success_url = '/'
-    success_message = "Thanks for being a part of Wavebook. We'll be in touch soon"
+    success_url = '/#signup'
+    success_message = "Thanks for being a part of Wavebook. We'll be in touch soon."
   
     def get_success_message(self, cleaned_data):
         return self.success_message 

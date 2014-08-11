@@ -1,81 +1,147 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class ="jumbotron">
-<h1>Welcome to Wavebook! We're under construction.</h1>
-</div>
-<div class = "jumbotron">
-{% if messages %}
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#intro">
+                    <i class="fa fa-play-circle"></i>Wavebook
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                 
+                    <li>
+                        <a class="page-scroll" href="#about">About</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#signup">Sign Up</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Intro Header -->
+    <header id="intro" class="intro">
+        
+                      
+                  
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2">
+                        <h1 class="brand-heading">Wavebook</h1>
+                        <p class="intro-text">Coming Soon:<br>A Visual Database for Surfing</p>
+                        <a href="#about" class="btn btn-circle page-scroll">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Wavebook: A Resource for the Inquisitive Surfer</h2>
+                
+                <p>Wavebook marries beautiful photos and videos with historical forecast conditions so you can get to know the ocean better.
+                Curious about how a spot behaves for any given swell? Just look it up and you'll be able to see the footage.</p>
+                <p>Interested? We'd love to chat. <a href="/#signup">Get involved</a>.<p>
+                
+             
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section id="signup" class="content-section text-center">
+        <div class="download-section">
+            <div class="container">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <row>
+                      
+                    <h2>Sign up for Wavebook</h2>
+                    <p>We're building Wavebook for you. Sign up to know when it's ready.</p>
+
+                    {% if messages %}
 
     {% for message in messages %}
     <div class="alert alert-success">{{ message }}</div>
     {% endfor %}
 
 {% endif %}
-  
-<form action="/" method="post">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit" />
-</form>
-</div>
+                  
+                <form action="/" method="post">
+                    {% csrf_token %}
+                   
+                    {{ form.as_p}}
+                    <input type="submit" value="Submit" class="btn btn-default btn-lg" />
+                </form>
+                   </row>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section id="contact" class="container content-section text-center">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2>Get Connected</h2>
+                <p>Follow us as we grow. We'd love to hear from you.</p>
+              
+                <ul class="list-inline banner-social-buttons">
+                    <li>
+                        <a href="https://twitter.com/SBootstrap" class="btn btn-default btn-lg"><i class="fa fa-twitter fa-fw"></i> <span class="network-name">Twitter</span></a>
+                    </li>
+                 
+                    <li>
+                        <a href="https://plus.google.com/+Startbootstrap/posts" class="btn btn-default btn-lg"><i class="fa fa-google-plus fa-fw"></i> <span class="network-name">Facebook</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-<div class="row text-center">
-            <div class="col-6 col-sm-6 col-lg-6">
-           
-    
-        <img src="{{ STATIC_URL }}images/wave1.jpg">
+   
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <p>Copyright &copy; Wavebook  2014</p>
+        </div>
+    </footer>
 
-      <div class="caption">
-         <p>Courtesy o123123f Joe Photog.</p>   
-      </div>
-          <h2>5/11/2014</h2>
+    <!-- jQuery Version 1.11.0 -->
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
 
-          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
-          <p><a class="btn btn-default" href="/trestles" role="button">Go To Spot&raquo;</a></p>
-            </div><!--/span-->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
 
-           <div class="col-6 col-sm-6 col-lg-6">
-           
-            
-          <img src="{{ STATIC_URL }}images/wave1.jpg">
+    <!-- Plugin JavaScript -->
+    <script src="{{ STATIC_URL }}js/jquery.easing.min.js"></script>
 
-      <div class="caption">
-         <p>Courtesy of Joe Photog.</p>   
-      </div>
-          <h2>5/12/2014</h2>
+   
 
-          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div>
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ STATIC_URL }}js/grayscale.js"></script>
+     <script src="{{ STATIC_URL }}js/jquery.easing.min.js"></script>
 
-          <div class="row text-center">
-          <div class="col-6 col-sm-6 col-lg-6">
-           
-         
-          <img src="{{ STATIC_URL }}images/wave3.jpg">
-
-      <div class="caption">
-         <p>Courtesy of Joe Photog.</p>   
-      </div>
-          <h2>5/13/2014</h2>
-
-          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/span--><div class="col-6 col-sm-6 col-lg-6">
-           
-            
-          <img src="{{ STATIC_URL }}images/wave4.jpg">
-
-      <div class="caption">
-         <p>Courtesy of Joe Photog.</p>   
-      </div>
-          <h2>5/14/2014</h2>
-
-          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div><!--/span-->
-          </div>
-{% endblock %}
+    {% endblock %}

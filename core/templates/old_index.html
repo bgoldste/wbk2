@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="marquee" style="text-align: center;
+color: #fff;
+background-color: #b84d45;
+background-image: url(/assets/img/bg.png);
+}">
+    <div class="container">
+        <span class="brand-name">Start Bootstrap</span>
+        <h1>Free Bootstrap Themes &amp; Templates</h1>
+        <p>Created and Maintained by <a href="http://www.ironsummitmedia.com">Iron Summit Media Strategies</a>
+        </p>
+        
+        <a href="/template-categories/all" class="btn btn-default btn-cta"><i class="fa fa-chevron-circle-right"></i> Browse Themes &amp; Templates</a>
+        <div id="carbonads-container">
+    <div class="carbonad">
+        <div id="azcarbon"><span><span class="carbonad-image"><a href="http://srv.carbonads.net/ads/click/x/GTND423ECASIT53ICVS4YKQWCTSI5KQECVBI5Z3JCEYD52J7CABD6K7KC6BDT27UCTADTK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:startbootstrapcom&amp;encredirect=https%3A%2F%2Fbs.serving-sys.com%2FBurstingPipe%2FadServer.bs%3Fcn%3Dbrd%26FlightID%3D8817843%26Page%3D%26PluID%3D0%26Pos%3D524119787" target="_blank"><img width="130" height="100" border="0" src="https://bs.serving-sys.com/BurstingPipe/adServer.bs?cn=bsr&amp;FlightID=8817843&amp;Page=&amp;PluID=0&amp;Pos=524119787" class="carbonad-image carbonad-img"></a></span><span class="carbonad-text"><a href="http://srv.carbonads.net/ads/click/x/GTND423ECASIT53ICVS4YKQWCTSI5KQECVBI5Z3JCEYD52J7CABD6K7KC6BDT27UCTADTK3EHJNCLSIZZRLCP7I35MNFV?segment=placement:startbootstrapcom&amp;encredirect=https%3A%2F%2Fbs.serving-sys.com%2FBurstingPipe%2FadServer.bs%3Fcn%3Dbrd%26FlightID%3D8817843%26Page%3D%26PluID%3D0%26Pos%3D524119787">SendGrid SMTP Service: Avoid Spam Folders &amp; Ensure Email Delivery. Free Sign-up.</a></span><span class="carbonad-tag">ads via <a href="http://carbonads.com">Carbon</a></span><img src="http://sendgrid.sp1.convertro.com/view/vt/v1/sendgrid/1/cvo.gif?cvosrc=display.Carbon.Carbon-130x100&amp;cvo_pid=8817843&amp;cvo_cid=379324&amp;cache=1407709979" border="0" height="1" width="1" style="display: none;"></span></div>
+        <script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qcxXvkaohGw.O/m=auth/exm=follow,plusone/rt=j/sv=1/d=1/ed=1/am=EQ/rs=AItRSTMiQ3DliY8yGP7oSyUhTCaOu3Fc5Q/cb=gapi.loaded_1" async=""></script><script src="https://apis.google.com/_/scs/apps-static/_/js/k=oz.gapi.en.qcxXvkaohGw.O/m=follow,plusone/rt=j/sv=1/d=1/ed=1/am=EQ/rs=AItRSTMiQ3DliY8yGP7oSyUhTCaOu3Fc5Q/cb=gapi.loaded_0" async=""></script><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript" async="" src="https://apis.google.com/js/platform.js" gapi_processed="true"></script><script id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script><script type="text/javascript" async="" src="http://engine.carbonads.com/z/51625/azcarbon_2_1_0_HORIZ"></script><script type="text/javascript">
+        var z = document.createElement("script");
+        z.type = "text/javascript";
+        z.async = true;
+        z.src = "http://engine.carbonads.com/z/51625/azcarbon_2_1_0_HORIZ";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(z, s);
+        </script>
+    </div>
+</div>
+
+    </div>
+</header>
+
+
+
+
+<br><br>
+<br><br><div class ="jumbotron">
+<h1>Welcome to Wavebook! We're under construction.</h1>
+</div>
+<div class = "jumbotron">
+{% if messages %}
+
+    {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+{% endif %}
+  
+<form action="/" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" />
+</form>
+</div>
+
+
+<div class="row text-center">
+            <div class="col-6 col-sm-6 col-lg-6">
+           
+    
+        <img src="{{ STATIC_URL }}images/wave1.jpg">
+
+      <div class="caption">
+         <p>Courtesy o123123f Joe Photog.</p>   
+      </div>
+          <h2>5/11/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="/trestles" role="button">Go To Spot&raquo;</a></p>
+            </div><!--/span-->
+
+           <div class="col-6 col-sm-6 col-lg-6">
+           
+            
+          <img src="{{ STATIC_URL }}images/wave1.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/12/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div>
+
+          <div class="row text-center">
+          <div class="col-6 col-sm-6 col-lg-6">
+           
+         
+          <img src="{{ STATIC_URL }}images/wave3.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/13/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span--><div class="col-6 col-sm-6 col-lg-6">
+           
+            
+          <img src="{{ STATIC_URL }}images/wave4.jpg">
+
+      <div class="caption">
+         <p>Courtesy of Joe Photog.</p>   
+      </div>
+          <h2>5/14/2014</h2>
+
+          <p><strong>Conditions:</strong> 5ft SSW @ 11 seconds  5 knots W. (Offshore!)  -0.1 ft (negative low, rising)</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+            </div><!--/span-->
+          </div>
+{% endblock %}
