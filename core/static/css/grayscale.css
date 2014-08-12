@@ -136,7 +136,9 @@ a:focus {
     display: table;
     width: 100%;
     height: auto;
-    padding: 100px 0;
+    max-width: 100%;
+
+    
     text-align: center;
     color: #fff;
     background: url(../images/wave_background.jpg) no-repeat bottom center scroll;
@@ -150,7 +152,7 @@ a:focus {
 .intro .intro-body {
     display: table-cell;
     vertical-align: middle;
-    padding: 100px;
+    padding-top: 50px;
 }
 
 .intro .intro-body .brand-heading {
