@@ -6,25 +6,38 @@
 
 	<table>
 		<thead>
-
-			<tr>{% for HeaderTitle in HeaderTitles %}
-				<td>{{HeaderTitle}}</td>
-				{% endfor %}
-			</tr>
-			
-		</thead>	
-		<thead>
-			{% for data in ForecastData %}
 			<tr>
-				{% for s in data %}
-				<td>{{s}}</td>
-				{% endfor %}
+				<td>ID</td>
+				<td>Date and Time</td>				
+				<td>WDIR</td>				
+				<td>WSPD</td>				
+				<td>GST</td>				
+				<td>WVHT</td>				
+				<td>DPD</td>				
+				<td>APD</td>				
+				<td>MWD</td>				
+				<td>PRES</td>				
+				<td>ATMP</td>				
+				<td>WTMP</td>				
+				<td>DEWP</td>				
+				<td>VIS</td>
+				<td>PTDY</td>
+				<td>TIDE</td>
 			</tr>
-			{% endfor %}
 			
-		</thead>	
-
+		</thead>
+		<tbody>
+			{% for x in all %}
+				<tr>
+					{% for s in x %}
+					<td>{{s}}</td>
+					{% endfor %}
+				</tr>	
+			{% endfor %}
+		</tbody>			
+	
 
 
 	</table>
-</div>
+=
+	</div>

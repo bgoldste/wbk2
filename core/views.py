@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.views.generic import CreateView
 from forms import EmailForm
 from django import forms
-from core.models import Subscriber
+from core.models import Subscriber, ForecastData
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from wbk2.tasks import getForecastData, getHeaderTitles, getAllData
@@ -24,7 +24,9 @@ class HomePageView(SuccessMessageMixin, CreateView):
 
 def forecast(request):
 	context = RequestContext(request)
-	data = getAllData()
-	context["HeaderTitles"] = getHeaderTitles(data)
-	context["ForecastData"] = getForecastData(data)
+	#data = getAllData()
+	#context["HeaderTitles"] = getHeaderTitles(data)
+	#context["ForecastData"] = getForecastData(data)
+	context["all"] = ForecastData.objects.all().values_list().order_by("-date")
+
 	return render_to_response('wbk.html', context)

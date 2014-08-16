@@ -13,6 +13,8 @@ gunicorn==18.0
 paramiko==1.14.0
 psycopg2==2.5.2
 pycrypto==2.6.1
+pytz==2014.4
+requests==2.3.0
 six==1.7.3
 sqlparse==0.1.11
 static3==0.5.1

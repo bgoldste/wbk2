@@ -4,7 +4,7 @@ from core.views import HomePageView,forecast
 import core
 
 
-#admin.autodiscover()
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
