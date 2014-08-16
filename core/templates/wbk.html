@@ -1,0 +1,30 @@
+
+
+<div class = "jumbotron">
+	
+
+
+	<table>
+		<thead>
+
+			<tr>{% for HeaderTitle in HeaderTitles %}
+				<td>{{HeaderTitle}}</td>
+				{% endfor %}
+			</tr>
+			
+		</thead>	
+		<thead>
+			{% for data in ForecastData %}
+			<tr>
+				{% for s in data %}
+				<td>{{s}}</td>
+				{% endfor %}
+			</tr>
+			{% endfor %}
+			
+		</thead>	
+
+
+
+	</table>
+</div>

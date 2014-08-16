@@ -2,11 +2,14 @@
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.template import RequestContext
 from django.views.generic import CreateView
 from forms import EmailForm
 from django import forms
 from core.models import Subscriber
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render, render_to_response, get_object_or_404, redirect
+from wbk2.tasks import getForecastData, getHeaderTitles, getAllData
 
 class HomePageView(SuccessMessageMixin, CreateView):
     template_name = "index.html"
@@ -18,3 +21,10 @@ class HomePageView(SuccessMessageMixin, CreateView):
     def get_success_message(self, cleaned_data):
         return self.success_message 
 
+
+def forecast(request):
+	context = RequestContext(request)
+	data = getAllData()
+	context["HeaderTitles"] = getHeaderTitles(data)
+	context["ForecastData"] = getForecastData(data)
+	return render_to_response('wbk.html', context)
