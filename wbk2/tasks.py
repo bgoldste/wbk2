@@ -3,10 +3,11 @@ from datetime import datetime
 from pytz import timezone
 import pytz
 from django.utils import timezone
-from core.models import ForecastData
-def getAllData():
+from core.models import ForecastData, Spot
+
+def getAllData(Spot):
 	#returns split list of all data. will have to hardcode in length of line for now. Later pass it in
-	return(requests.get('http://ndbc.noaa.gov/data/5day2/42012_5day.txt').text.split())
+	return(requests.get(Spot.url).text.split)
 	
 def getHeaderTitles(data):
 	#returns header titles as list
@@ -15,10 +16,10 @@ def getHeaderTitles(data):
 	
 	return(HeaderTitles)
 
-def getForecastData(data):
-	#returns just the data (baby)
-	#should make it optionally take data or just pull it from web
-	#skip past 1st two rows. Change from hardcoding later.
+def getForecastData(Spot):
+	#reads data from the url attached to a spot, and save data to db w/ foreign key
+	data = requests.get(Spot.url).text.split()
+	print "data received"
 	entries = 19
 	HeaderTitles = entries * 2
 	count = HeaderTitles
@@ -38,10 +39,16 @@ def getForecastData(data):
 		remaining_data.insert(0, date)
 		ReturnData.append(remaining_data)
 
-		ForecastData(date = date, WDIR = remaining_data[1], WSPD = remaining_data[2], GST = remaining_data[3], WVHT = remaining_data[4], DPD = remaining_data[5], APD = remaining_data[6], MWD = remaining_data[7], PRES = remaining_data[8], ATMP = remaining_data[9], WTMP = remaining_data[10], DEWP = remaining_data[11], VIS = remaining_data[12], PTDY = remaining_data[13], TIDE = remaining_data[14]).save()
+		ForecastData(
+			date = date, spot = Spot,
+			WDIR = remaining_data[1], WSPD = remaining_data[2], GST = remaining_data[3],
+			WVHT = remaining_data[4], DPD = remaining_data[5], APD = remaining_data[6], 
+			MWD = remaining_data[7], PRES = remaining_data[8], ATMP = remaining_data[9], 
+			WTMP = remaining_data[10], DEWP = remaining_data[11], VIS = remaining_data[12], 
+			PTDY = remaining_data[13], TIDE = remaining_data[14]
+			).save()
 
-
-		
+		print "entry added"
 		count += entries
 
 	return(ReturnData)

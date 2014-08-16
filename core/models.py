@@ -7,6 +7,14 @@ class Subscriber(models.Model):
 	def __unicode__(self):
 		return u'%s' % (self.email_address)
 
+class Spot(models.Model):
+	name = models.TextField(default="San Francisco")
+	url = models.TextField(default = 'http://ndbc.noaa.gov/data/5day2/42012_5day.txt')
+
+	def __unicode__(self):
+		return u'%s' % (self.name)
+
+
 class ForecastData(models.Model):
 	
 	date = models.DateTimeField()
@@ -24,5 +32,11 @@ class ForecastData(models.Model):
 	VIS = models.FloatField(null=True)
 	PTDY = models.FloatField(null=True)
 	TIDE = models.FloatField(null=True)
+	spot = models.ForeignKey(Spot, null = True)
+	class Meta:
+		unique_together = (('date','spot'),)
+
+
 	def __unicode__(self):
 		return u'%s' % (self.date)
+
