@@ -2,14 +2,14 @@ from django.db import models
 
 # Create your models here.
 class Subscriber(models.Model):
-	email_address = models.EmailField()
+	email_address = models.EmailField(unique=True)
 
 	def __unicode__(self):
 		return u'%s' % (self.email_address)
 
 class Spot(models.Model):
-	name = models.TextField(default="San Francisco")
-	url = models.TextField(default = 'http://ndbc.noaa.gov/data/5day2/42012_5day.txt')
+	name = models.TextField(default="San Francisco", unique = True)
+	url = models.TextField(default = 'http://ndbc.noaa.gov/data/5day2/42012_5day.txt', unique = True)
 
 	def __unicode__(self):
 		return u'%s' % (self.name)
@@ -32,11 +32,12 @@ class ForecastData(models.Model):
 	VIS = models.FloatField(null=True)
 	PTDY = models.FloatField(null=True)
 	TIDE = models.FloatField(null=True)
-	spot = models.ForeignKey(Spot, null = True)
+	spot = models.ForeignKey(Spot, null = False, default=1)
 	class Meta:
-		unique_together = (('date','spot'),)
+		unique_together = ("spot", "date")
 
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
 
+	
