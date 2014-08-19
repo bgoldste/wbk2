@@ -41,3 +41,16 @@ class AddSpotView(SuccessMessageMixin, CreateView):
   
     def get_success_message(self, cleaned_data):
         return self.success_message 
+
+
+
+def SpotView(request, **kwargs):
+	context = RequestContext(request)
+	spot = kwargs.get("spot")
+	try:
+		Spot.objects.get(name=spot)
+		context["spot"] = "Spot returned! %s" % (spot)
+		return render_to_response('spot.html', context)
+	except Spot.DoesNotExist:
+		context["spot"] = "Got Nada por you bro."
+		return render_to_response('nospot.html', context)

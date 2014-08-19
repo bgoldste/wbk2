@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core.views import HomePageView,forecast, AddSpotView
+from core.views import HomePageView,forecast, AddSpotView, SpotView
 import core
 
 
@@ -19,5 +19,6 @@ urlpatterns = patterns('',
  	url(r'^$', HomePageView.as_view()),
  	url(r'^wbk/', core.views.forecast,),
  	url(r'^addspot/', AddSpotView.as_view()),
+ 	url(r'^spots/(?P<spot>[\w]{0,10})$', SpotView),
 
 )
