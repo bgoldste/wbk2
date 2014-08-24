@@ -1,0 +1,14 @@
+{% if messages %}
+
+   {% for message in messages %}
+    <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+
+{% endif %}
+                  
+                <form action="/addspot/" method="post">
+                    {% csrf_token %}
+                   
+                  {{ form.as_p}}
+                    <input type="submit" value="Submit" class="btn btn-default btn-lg" />
+                </form>

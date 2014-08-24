@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+		
+	 <link href="{{ STATIC_URL }}css/spot.css" rel="stylesheet">
+	
+
+
+
+
+
+	 <div >
+
+	 	<h1>{{spot}}</h1>
+	 
+	 </div>
+
+
+	 <div class="container">
+
+
+<div class="row"><div class="col-xs-12 col-md-8">	
+	{% for s in imageset2 %}
+  <div class="thumbnail">
+      <img class = "thumbnail-image" src=" {{s.image.url}}"  >
+      <div class="caption">
+        <h3>{{s.data.date}}</h3>
+        <p>WDIR: {{s.data.WDIR}} WSPD:{{s.data.WSPD}} WVHT:{{s.data.WVHT}} DPD {{s.data.MWD}}</p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+      </div>
+    </div>
+  {% endfor %}
+		</div>
+<div class="col-xs-12 col-md-4">	
+	<div class="jumbotron"><p>adasdasd</p></div>
+		</div>
+		</div> 
+
+
+      
+{% endblock %}

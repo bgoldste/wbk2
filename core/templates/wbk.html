@@ -1,0 +1,43 @@
+
+
+<div class = "jumbotron">
+	
+
+
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>Date and Time</td>				
+				<td>WDIR</td>				
+				<td>WSPD</td>				
+				<td>GST</td>				
+				<td>WVHT</td>				
+				<td>DPD</td>				
+				<td>APD</td>				
+				<td>MWD</td>				
+				<td>PRES</td>				
+				<td>ATMP</td>				
+				<td>WTMP</td>				
+				<td>DEWP</td>				
+				<td>VIS</td>
+				<td>PTDY</td>
+				<td>TIDE</td>
+			</tr>
+			
+		</thead>
+		<tbody>
+			{% for x in all %}
+				<tr>
+					{% for s in x %}
+					<td>{{s}}</td>
+					{% endfor %}
+				</tr>	
+			{% endfor %}
+		</tbody>			
+	
+
+
+	</table>
+
+	</div>
