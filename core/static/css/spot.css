@@ -3,7 +3,7 @@ body {
     height: 100%;
     font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #fff;
-    background-color: #3D7A99;
+    background-color: #000000;
 }
 
 img {
@@ -14,6 +14,7 @@ img {
 .thumbnail {
 	padding: 30px;
 	border-style: solid;
+	border-color: #A30034;
     border-width: 20px;
 
 
@@ -28,7 +29,8 @@ img {
 }
 
 .caption {
+	margin-top: 5px;
 	border-style: solid;
     border-width: 20px;
-	
+
 }
