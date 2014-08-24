@@ -1,5 +1,5 @@
 from django.db import models
-
+import os
 # Create your models here.
 class Subscriber(models.Model):
 	email_address = models.EmailField(unique=True)
@@ -39,5 +39,17 @@ class ForecastData(models.Model):
 
 	def __unicode__(self):
 		return u'%s' % (self.date)
+
+
+
+class ImageData(models.Model):
+    data = models.ForeignKey(ForecastData, default=1)
+    spot = models.ForeignKey(Spot, default =1)
+    image = models.ImageField(upload_to='images', blank=True, null=True)
+    def __unicode__(self):
+	
+		return  u'%s' % (self.image)
+
+ 
 
 	

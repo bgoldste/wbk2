@@ -4,6 +4,7 @@ from pytz import timezone
 import pytz
 from django.utils import timezone
 from core.models import ForecastData, Spot
+from django.core.exceptions import MultipleObjectsReturned
 
 def getAllData(Spot):
 	#returns split list of all data. will have to hardcode in length of line for now. Later pass it in
@@ -25,7 +26,7 @@ def getForecastData(Spot):
 	count = HeaderTitles
 
 	ReturnData = []
-
+	print "start iterating through data"
 	while (len(data)!=count):
 		current_row = data[count:(count + entries)]
 		
@@ -38,18 +39,23 @@ def getForecastData(Spot):
 
 		remaining_data.insert(0, date)
 		ReturnData.append(remaining_data)
+		try:
+			print ForecastData.objects.get_or_create(
+				date = date, spot = Spot,
+				WDIR = remaining_data[1], WSPD = remaining_data[2], GST = remaining_data[3],
+				WVHT = remaining_data[4], DPD = remaining_data[5], APD = remaining_data[6], 
+				MWD = remaining_data[7], PRES = remaining_data[8], ATMP = remaining_data[9], 
+				WTMP = remaining_data[10], DEWP = remaining_data[11], VIS = remaining_data[12], 
+				PTDY = remaining_data[13], TIDE = remaining_data[14]
+				)
 
-		ForecastData.objects.get_or_create(
-			date = date, spot = Spot,
-			WDIR = remaining_data[1], WSPD = remaining_data[2], GST = remaining_data[3],
-			WVHT = remaining_data[4], DPD = remaining_data[5], APD = remaining_data[6], 
-			MWD = remaining_data[7], PRES = remaining_data[8], ATMP = remaining_data[9], 
-			WTMP = remaining_data[10], DEWP = remaining_data[11], VIS = remaining_data[12], 
-			PTDY = remaining_data[13], TIDE = remaining_data[14]
-			)
+			#print "entry added"
+			count += entries
 
-		print "entry added"
-		count += entries
+			
+		except MultipleObjectsReturned:
+			print "returning because multiple returned"
+			return(ReturnData)
 
 	return(ReturnData)
 

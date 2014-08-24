@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.views.generic import CreateView
 from forms import EmailForm, SpotForm
 from django import forms
-from core.models import Spot, Subscriber, ForecastData
+from core.models import *
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from wbk2.tasks import getForecastData, getHeaderTitles, getAllData
@@ -46,11 +46,25 @@ class AddSpotView(SuccessMessageMixin, CreateView):
 
 def SpotView(request, **kwargs):
 	context = RequestContext(request)
-	spot = kwargs.get("spot")
+	spot = kwargs.get("spot") 	
+
 	try:
-		Spot.objects.get(name=spot)
-		context["spot"] = "Spot returned! %s" % (spot)
+		spot = Spot.objects.get(name=spot)
+		context["spot"] = (spot)
+		image_set2 = []
+		image_set = ImageData.objects.filter(spot=spot.id).order_by("-data")
+		context["images"] = image_set[0].image.url
+		for a in image_set:
+			
+			image_set2.append(a) 
+		context["imageset2"] = image_set2
+
+		context["data"] = ForecastData.objects.all().values_list().order_by("-date")
+		context["total_objects"] = len(ForecastData.objects.all())
 		return render_to_response('spot.html', context)
 	except Spot.DoesNotExist:
+		context["spot"] = "Got Nada por you bro."
+		return render_to_response('nospot.html', context)
+	except IndexError:
 		context["spot"] = "Got Nada por you bro."
 		return render_to_response('nospot.html', context)
