@@ -53,7 +53,7 @@ def SpotView(request, **kwargs):
 		context["spot"] = (spot)
 		image_set2 = []
 		image_set = ImageData.objects.filter(spot=spot.id).order_by("-data")
-		context["images"] = image_set[0].image.url
+	
 		for a in image_set:
 			
 			image_set2.append(a) 
@@ -63,8 +63,8 @@ def SpotView(request, **kwargs):
 		context["total_objects"] = len(ForecastData.objects.all())
 		return render_to_response('spot.html', context)
 	except Spot.DoesNotExist:
-		context["spot"] = "Got Nada por you bro."
+		context["spot"] = "No spot with that name exists."
 		return render_to_response('nospot.html', context)
-	except IndexError:
-		context["spot"] = "Got Nada por you bro."
-		return render_to_response('nospot.html', context)
+	#except IndexError:
+		#context["spot"] = "Index error returnign."
+		#return render_to_response('nospot.html', context)
