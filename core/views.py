@@ -59,7 +59,7 @@ def SpotView(request, **kwargs):
 			image_set2.append(a) 
 		context["imageset2"] = image_set2
 
-		context["data"] = ForecastData.objects.all().values_list().order_by("-date")
+		context["data"] = ForecastData.objects.all().order_by("-date")
 		context["total_objects"] = len(ForecastData.objects.all())
 		return render_to_response('spot.html', context)
 	except Spot.DoesNotExist:

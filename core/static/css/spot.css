@@ -34,3 +34,12 @@ img {
     border-width: 20px;
 
 }
+
+.table-striped>tbody>tr:nth-child(odd)>td{
+
+
+    background-color:#3B9610;
+
+
+
+}

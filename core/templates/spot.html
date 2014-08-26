@@ -13,7 +13,7 @@
 
 	 <div >
 
-	 	<h1>{{spot}}</h1>
+	 	<h1 class="text-center">{{spot}} </h1>
 	 
 	 </div>
 
@@ -34,7 +34,37 @@
   {% endfor %}
 		</div>
 <div class="col-xs-12 col-md-4">	
-	<div class="jumbotron"><p>adasdasd</p></div>
+	<h2>Recent Forecasts for {{spot}}</h2>
+		<table class="table-striped">
+
+	
+      <thead>
+
+        <tr>
+        	<th> Date </th>
+          <th>WDIR: </th>
+          <th>WSPD</th>
+          <th>WVHT</th>
+          <th>DPD</th>
+        </tr>
+      </thead>
+      <tbody>
+      		{% for a in data %}
+      		
+        <tr>
+        	<td>{{a.date}}</td>
+          <td>{{a.WDIR}}</td>
+          <td>{{a.WSPD}}</td>
+          <td>{{a.WVHT}}</td>
+          <td>{{a.DPD}}</td>
+        </tr>
+        	{% endfor %}
+   
+      </tbody>
+    </table>
+
+
+
 		</div>
 		</div> 
 
