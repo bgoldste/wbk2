@@ -179,8 +179,8 @@ def matchdate(img, Spot):
 	date = datetime.datetime.utcfromtimestamp(img).replace(tzinfo=pytz.UTC)
 
 
-	lte = ForecastData.objects.filter(date__lte=date).order_by('-date')
-	gte = ForecastData.objects.filter(date__gt=date).order_by('date')
+	lte = ForecastData.objects.filter(spot= spot, date__lte=date).order_by('-date')
+	gte = ForecastData.objects.filter(spot = spot, date__gt=date).order_by('date')
 
 	if lte or gte:
 	   lte_obj =None
