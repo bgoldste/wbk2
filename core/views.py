@@ -15,6 +15,7 @@ import datetime
 import calendar
 import datetime
 import pytz
+from django.core.exceptions import MultipleObjectsReturned
 
 
 
@@ -144,8 +145,7 @@ def InstaScraperView(request, **kwargs):
 					b = ImageLink( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a))
 					b.save()
 					#dates += (matchdate(a),)
-					
-
+				
 
 
 

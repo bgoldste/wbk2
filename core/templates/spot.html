@@ -33,16 +33,16 @@
       <div class="caption">
 
       	
-		<h2>time == {{ s.ForecastData.date|localtime }} </h2>
+		<h2>Taken on: {{ s.ForecastData.date|localtime }} </h2>
 	
 
 
 
 
-      <h2>oldtime == {{ s.ForecastData.date}} </h2>
+ 
 
-        <p>WDIR: {{s.ForecastData.WDIR}} WSPD:{{s.ForecastData.WSPD}} WVHT:{{s.ForecastData.WVHT}} DPD {{s.ForecastData.MWD}}</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+        <p>Wind Direction(Degrees from N): {{s.ForecastData.WDIR}} Windspeed:{{s.ForecastData.WSPD}} m/s <br>Wave Height:{{s.ForecastData.WVHT}}m Swell Angle: {{s.ForecastData.MWD}}  Period {{s.ForecastData.DPD}} seconds</p>
+      
       </div>
     </div>
   {% endfor %}
