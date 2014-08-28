@@ -20,6 +20,8 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.TextField')(default='San Francisco', unique=True)),
             ('url', self.gf('django.db.models.fields.TextField')(default='http://ndbc.noaa.gov/data/5day2/42012_5day.txt', unique=True)),
+            ('lat', self.gf('django.db.models.fields.FloatField')(null=True)),
+            ('lon', self.gf('django.db.models.fields.FloatField')(null=True)),
         ))
         db.send_create_signal(u'core', ['Spot'])
 
@@ -52,6 +54,7 @@ class Migration(SchemaMigration):
         db.create_table(u'core_imagedata', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('data', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['core.ForecastData'])),
+            ('spot', self.gf('django.db.models.fields.related.ForeignKey')(default=1, to=orm['core.Spot'])),
             ('image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True)),
         ))
         db.send_create_signal(u'core', ['ImageData'])
@@ -99,11 +102,14 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'ImageData'},
             'data': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['core.ForecastData']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'})
+            'image': ('django.db.models.fields.files.ImageField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'spot': ('django.db.models.fields.related.ForeignKey', [], {'default': '1', 'to': u"orm['core.Spot']"})
         },
         u'core.spot': {
             'Meta': {'object_name': 'Spot'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'lat': ('django.db.models.fields.FloatField', [], {'null': 'True'}),
+            'lon': ('django.db.models.fields.FloatField', [], {'null': 'True'}),
             'name': ('django.db.models.fields.TextField', [], {'default': "'San Francisco'", 'unique': 'True'}),
             'url': ('django.db.models.fields.TextField', [], {'default': "'http://ndbc.noaa.gov/data/5day2/42012_5day.txt'", 'unique': 'True'})
         },

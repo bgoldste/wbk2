@@ -2,7 +2,8 @@
 
 {% block content %}
 
-
+{% load tz %}
+		{% timezone "US/Pacific-New" %} 
 		
 	 <link href="{{ STATIC_URL }}css/spot.css" rel="stylesheet">
 	
@@ -14,7 +15,11 @@
 	 <div >
 
 	 	<h1 class="text-center">{{spot}} </h1>
-	 
+	
+		
+
+
+
 	 </div>
 
 
@@ -22,12 +27,21 @@
 
 
 <div class="row"><div class="col-xs-12 col-md-8">	
-	{% for s in imageset2 %}
+	{% for s in images %}
   <div class="thumbnail">
-      <img class = "thumbnail-image" src=" {{s.image.url}}"  >
+      <img class = "thumbnail-image" src=" {{s.url}}"  >
       <div class="caption">
-        <h3>{{s.data.date}}</h3>
-        <p>WDIR: {{s.data.WDIR}} WSPD:{{s.data.WSPD}} WVHT:{{s.data.WVHT}} DPD {{s.data.MWD}}</p>
+
+      	
+		<h2>time == {{ s.ForecastData.date|localtime }} </h2>
+	
+
+
+
+
+      <h2>oldtime == {{ s.ForecastData.date}} </h2>
+
+        <p>WDIR: {{s.ForecastData.WDIR}} WSPD:{{s.ForecastData.WSPD}} WVHT:{{s.ForecastData.WVHT}} DPD {{s.ForecastData.MWD}}</p>
         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
       </div>
     </div>
@@ -69,5 +83,5 @@
 		</div> 
 
 
-      
+      	 {% endtimezone %}
 {% endblock %}

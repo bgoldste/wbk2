@@ -51,16 +51,14 @@ def SpotView(request, **kwargs):
 	try:
 		spot = Spot.objects.get(name=spot)
 		context["spot"] = (spot)
-		image_set2 = []
-		image_set = ImageData.objects.filter(spot=spot.id).order_by("-data")
 	
-		for a in image_set:
-			
-			image_set2.append(a) 
-		context["imageset2"] = image_set2
+		data = ForecastData.objects.filter(spot = spot.id ).order_by("-date")
 
-		context["data"] = ForecastData.objects.all().order_by("-date")
-		context["total_objects"] = len(ForecastData.objects.all())
+		context["images"] = ImageLink.objects.filter(ForecastData__spot=spot.id)
+	
+
+		context["data"] = data
+		
 		return render_to_response('spot.html', context)
 	except Spot.DoesNotExist:
 		context["spot"] = "No spot with that name exists."

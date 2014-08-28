@@ -10,6 +10,9 @@ class Subscriber(models.Model):
 class Spot(models.Model):
 	name = models.TextField(default="San Francisco", unique = True)
 	url = models.TextField(default = 'http://ndbc.noaa.gov/data/5day2/42012_5day.txt', unique = True)
+	lat = models.FloatField(null=True)
+	lon = models.FloatField(null=True)
+
 
 	def __unicode__(self):
 		return u'%s' % (self.name)
@@ -51,5 +54,14 @@ class ImageData(models.Model):
 		return  u'%s' % (self.image)
 
  
+
+class ImageLink(models.Model):
+
+	url = models.TextField()
+	ForecastData = models.ForeignKey(ForecastData, default=1, null=True)
+	
+	def __unicode__(self):
+		return  u'%s' % (self.url)
+
 
 	
