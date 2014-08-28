@@ -119,7 +119,7 @@ def InstaScraperView(request, **kwargs):
 	images = ()
 	dates = ()
 	count = 0
-	while len(images) < 200:
+	while len(images) < 30:
 		count += 1
 		#print "COUNT #" , count
 		print "max time" , max_timestamp
@@ -150,7 +150,7 @@ def InstaScraperView(request, **kwargs):
 					#print a['link']
 					#print "searchObj.group() : ", searchObj
 					images += (a["images"]["standard_resolution"]['url'],)
-					b = ImageLink( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a))
+					b = ImageLink( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a, spot))
 					b.save()
 					#dates += (matchdate(a),)
 				
@@ -172,7 +172,7 @@ def InstaScraperView(request, **kwargs):
 
 
 
-def matchdate(img):
+def matchdate(img, Spot):
 	print "MATCHDATE CREATED TIME PULL" , img["created_time"]
 	img = int(img["created_time"])
 	print  datetime.datetime.utcfromtimestamp(img)
