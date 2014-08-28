@@ -43,14 +43,22 @@ class HomePageView(SuccessMessageMixin, CreateView):
         return self.success_message 
 
 
-def forecast(request):
+def forecast(request, **kwargs):
 	context = RequestContext(request)
-	getForecastData(Spot.objects.all()[0])
-	#context["HeaderTitles"] = getHeaderTitles(data)
-	#context["ForecastData"] = getForecastData(data)
-	context["all"] = ForecastData.objects.all().values_list().order_by("-date")
+	spot = kwargs.get("spot")
+	try:
+		spot = Spot.objects.get(name=spot) 	
 
-	return render_to_response('wbk.html', context)
+		
+		#context["HeaderTitles"] = getHeaderTitles(data)
+		#context["ForecastData"] = getForecastData(data)
+		context["all"] = getForecastData(spot)
+		return render_to_response('wbk.html', context)
+
+
+	except Spot.DoesNotExist:
+		context["spot"] = "No spot with that name exists."
+		return render_to_response('nospot.html', context)
 
 
 class AddSpotView(SuccessMessageMixin, CreateView):
