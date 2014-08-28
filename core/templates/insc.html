@@ -1,0 +1,17 @@
+<body>
+<h1>Insta scraper for {{spot}}</h1>
+<h3>	{{dates}}			</h3>
+<div class="thumbnail">
+      <img class = "thumbnail-image" src=" {{s.url}}"  >
+      <div class="caption">
+
+
+      	{% load tz %}
+		{% timezone "US/Pacific-New" %} 
+
+      	{% for s in images %}
+		<img src="{{s}}"/>
+    </div>
+  {% endfor %}
+  {% endtimezone %}
+</body>

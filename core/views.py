@@ -3,13 +3,33 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from django.views.generic import CreateView
+from django.views.generic import CreateView		
 from forms import EmailForm, SpotForm
 from django import forms
 from core.models import *
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from wbk2.tasks import getForecastData, getHeaderTitles, getAllData
+import requests, re
+import datetime
+import calendar
+import datetime
+import pytz
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class HomePageView(SuccessMessageMixin, CreateView):
     template_name = "index.html"
@@ -66,3 +86,108 @@ def SpotView(request, **kwargs):
 	#except IndexError:
 		#context["spot"] = "Index error returnign."
 		#return render_to_response('nospot.html', context)
+
+
+
+def InstaScraperView(request, **kwargs):
+	context = RequestContext(request)
+	spot = kwargs.get("spot") 	
+	context["spot"] = spot
+	spot = Spot.objects.get(name=spot)
+	
+
+	base_url = "https://api.instagram.com/v1/media/search"
+	max_timestamp = 1409184603
+	distance = 5000
+	lat = spot.lat
+	lon = spot.lon
+
+	client_id="ad3fa66bd197402d98d490127e06d6d8"
+
+	url = "%s?max_timestamp=%s&distance=%s&lat=%s&lng=%s&client_id=%s" % (base_url, max_timestamp, distance, lat, lon, client_id)
+
+	data =requests.get(url).json()['data']
+	images = ()
+	dates = ()
+	count = 0
+	while len(images) < 30:
+		count += 1
+		#print "COUNT #" , count
+		print "max time" , max_timestamp
+		#print "len" , len(images)
+		url = "%s?max_timestamp=%s&distance=%s&lat=%s&lng=%s&client_id=%s" % (base_url, max_timestamp, distance, lat, lon, client_id)
+
+		data =requests.get(url).json()['data']
+
+		
+
+
+		for a in data:
+			#print "max_timestamp", max_timestamp, "created_time for current ", a["created_time"]
+			if max_timestamp > float(a["created_time"]):
+				#print "changing time stamp"
+				max_timestamp = a["created_time"]
+			#print "max-time" , max_timestamp
+			if a["caption"]:
+			#print a["caption"]['text'].encode('utf-8')
+		
+			#print a["link"]
+			#print '<img src="', str(a["images"]["standard_resolution"]['url']), '">'
+		
+				line = a["caption"]['text'].encode('utf-8')
+				searchObj = re.search( r'(surf)+', line)
+				if searchObj:
+					#print a["caption"]['text'].encode('utf-8')
+					#print a['link']
+					#print "searchObj.group() : ", searchObj
+					images += (a["images"]["standard_resolution"]['url'],)
+					b = ImageLink( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a))
+					b.save()
+					#dates += (matchdate(a),)
+					
+
+
+
+
+
+		#grab forecast data associated w images
+		#for a in images:
+			#print a
+
+	
+
+
+	context["images"] = images
+	context["dates"] = dates
+	return  render_to_response("insc.html", context)
+
+
+
+
+def matchdate(img):
+	print "MATCHDATE CREATED TIME PULL" , img["created_time"]
+	img = int(img["created_time"])
+	print  datetime.datetime.utcfromtimestamp(img)
+	date = datetime.datetime.utcfromtimestamp(img).replace(tzinfo=pytz.UTC)
+
+
+	lte = ForecastData.objects.filter(date__lte=date).order_by('-date')
+	gte = ForecastData.objects.filter(date__gt=date).order_by('date')
+
+	if lte or gte:
+	   lte_obj =None
+	   gte_obj = None
+	   if not lte:
+	    	return gte[0]
+	   else:
+	      lte_obj = lte[0]
+
+	   if not gte:
+	      return lte[0]
+	   else:
+	      gte_obj = gte[0]
+	   import math
+	   timestamp_diff = abs(lte_obj.date - date) > abs(gte_obj.date- date)
+
+	   return  gte_obj if timestamp_diff else lte_obj
+	return  None

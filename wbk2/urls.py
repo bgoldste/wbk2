@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from core.views import HomePageView,forecast, AddSpotView, SpotView
+from core.views import *
 import core
 import settings
 
@@ -21,6 +21,7 @@ urlpatterns = patterns('',
  	url(r'^wbk/', core.views.forecast,),
  	url(r'^addspot/', AddSpotView.as_view()),
  	url(r'^spots/(?P<spot>[\w]{0,10})$', SpotView),
+    url(r'^insc/(?P<spot>[\w]{0,10})$', InstaScraperView),
 
 )
 if settings.DEBUG:
