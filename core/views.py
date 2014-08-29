@@ -97,6 +97,11 @@ def SpotView(request, **kwargs):
 		#context["spot"] = "Index error returnign."
 		#return render_to_response('nospot.html', context)
 
+def spotList (request):
+	context = RequestContext(request)
+	context["spots"] = Spot.objects.all()
+	return render_to_response("spotlist.html" , context)
+
 
 
 def InstaScraperView(request, **kwargs):
@@ -120,7 +125,7 @@ def InstaScraperView(request, **kwargs):
 	images = ()
 	dates = ()
 	count = 0
-	while len(images) < 30:
+	while len(images) < 40:
 		count += 1
 		#print "COUNT #" , count
 		print "max time" , max_timestamp

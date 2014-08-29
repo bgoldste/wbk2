@@ -10,4 +10,4 @@ class EmailForm(ModelForm):
 class SpotForm(ModelForm):
 	class Meta:
 		model = Spot
-		fields = ['name', 'url']
+		fields = ['name', 'url', 'lat', 'lon']

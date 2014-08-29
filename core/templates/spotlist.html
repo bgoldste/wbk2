@@ -1,0 +1,16 @@
+
+
+{% for a in spots %}
+<div>
+	<ul>
+<li><a href="/spots/{{a.name}}"> {{a.name}}</a></li>
+<li><a href ="/wbk/{{a.name}}"> {{a.name}} run wbk </a></li>
+<li><a href ="/insc/{{a.name}}"> {{a.name}} run insc</a></li>
+<ul>
+</div>
+<br>
+{% endfor %}
+
+<br>
+
+<a href="/addspot"> add spot </a>

@@ -20,6 +20,7 @@ urlpatterns = patterns('',
  	url(r'^$', HomePageView.as_view()),
  	url(r'^wbk/(?P<spot>[\w]{0,10})$', core.views.forecast,),
  	url(r'^addspot/', AddSpotView.as_view()),
+    url(r'^spots/$', spotList),
  	url(r'^spots/(?P<spot>[\w]{0,10})$', SpotView),
     url(r'^insc/(?P<spot>[\w]{0,10})$', InstaScraperView),
 
