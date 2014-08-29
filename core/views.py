@@ -16,6 +16,7 @@ import calendar
 import datetime
 import pytz
 from django.core.exceptions import MultipleObjectsReturned
+import time
 
 
 
@@ -106,7 +107,7 @@ def InstaScraperView(request, **kwargs):
 	
 
 	base_url = "https://api.instagram.com/v1/media/search"
-	max_timestamp = 1409184603
+	max_timestamp = int(time.time())
 	distance = 5000
 	lat = spot.lat
 	lon = spot.lon
@@ -150,8 +151,8 @@ def InstaScraperView(request, **kwargs):
 					#print a['link']
 					#print "searchObj.group() : ", searchObj
 					images += (a["images"]["standard_resolution"]['url'],)
-					b = ImageLink( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a, spot))
-					b.save()
+					ImageLink.objects.get_or_create( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a, spot))
+					
 					#dates += (matchdate(a),)
 				
 
@@ -172,7 +173,7 @@ def InstaScraperView(request, **kwargs):
 
 
 
-def matchdate(img, Spot):
+def matchdate(img, spot):
 	print "MATCHDATE CREATED TIME PULL" , img["created_time"]
 	img = int(img["created_time"])
 	print  datetime.datetime.utcfromtimestamp(img)
