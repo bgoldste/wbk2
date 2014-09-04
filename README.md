@@ -9,3 +9,4 @@ This is an in-progress build of a surfing website that does a few things with da
 
 TODOS-
 change how spots are displayed
+Add Celery (or some other task queue) to automate data scraping. Move scrapers from views to tasks.py.
