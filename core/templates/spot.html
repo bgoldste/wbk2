@@ -15,6 +15,7 @@
 	 <div >
 
 	 	<h1 class="text-center">{{spot}} </h1>
+    <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
 	
 		
 
@@ -28,18 +29,14 @@
 
 <div class="row"><div class="col-xs-12 col-md-8">	
 	{% for s in images %}
-  <div class="thumbnail">
-      <img class = "thumbnail-image" src=" {{s.url}}"  >
-      <div class="caption">
+ 
+      <img class = "responsive-image" src=" {{s.url}}"  >
+     
 
       	
 		<h2>Taken on: {{ s.ForecastData.date|localtime }} </h2>
 	
 
-
-
-
- 
 
         <p>Wind Direction(Degrees from N): {{s.ForecastData.WDIR}} Windspeed:{{s.ForecastData.WSPD}} m/s <br>Wave Height:{{s.ForecastData.WVHT}}m Swell Angle: {{s.ForecastData.MWD}}  Period {{s.ForecastData.DPD}} seconds</p>
       

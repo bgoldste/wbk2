@@ -84,10 +84,10 @@ def SpotView(request, **kwargs):
 	
 		data = ForecastData.objects.filter(spot = spot.id ).order_by("date")
 
-		context["images"] = ImageLink.objects.filter(ForecastData__spot=spot.id)
-	
+		context["images"] = ImageLink.objects.filter(ForecastData__spot=spot.id).order_by("-ForecastData__date")
+		context["current_forecast"] = ForecastData.objects.filter(spot = spot.id ).order_by("-date")[0]
 
-		context["data"] = data
+		#context["data"] = data
 		
 		return render_to_response('spot.html', context)
 	except Spot.DoesNotExist:
