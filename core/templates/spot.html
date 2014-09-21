@@ -6,7 +6,7 @@
 		{% timezone "US/Pacific-New" %} 
 		
 	 <link href="{{ STATIC_URL }}css/spot.css" rel="stylesheet">
-	
+	  
 
 
 
@@ -18,21 +18,31 @@
     <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
 	
 		
+<div style= "visibilty:hidden" id="filters">
+  <input type="checkbox" name="red" value=".red" id="red"><label for="red">red</label>
+  <input type="checkbox" name="blue" value=".blue" id="blue"><label for="blue">blue</label>
+  <input type="checkbox" name="green" value=".green" id="green"><label for="green">green</label>
+  <input type="checkbox" name="yellow" value=".yellow" id="yellow"><label for="yellow">yellow</label>
+  <input type="checkbox" name="w-0.8" value=".w-0.8" id="w-0.8"><label for="w-0.8">w-0.8</label>
+</div>
+
+<p><button id="shuffle">Shuffle</button></p>
+
 
 
 
 	 </div>
 
 
-	 <div class="container-fluid" >
+	 <div class="container-fluid"  >
    
-<div class = "row" id= "forecasts">
+<div class = "row" id= "container">
 
 	{% for s in images %}
  
 
   
-    <div class = "col-xs-12 col-md-4 item" >
+    <div class = "col-xs-12 col-md-4 item w-{{s.ForecastData.WVHT}}" data-category="transition" >
       <img class = "responsive-image "  style = "width: 100%;" src=" {{s.url}}"  >
      
 
@@ -76,6 +86,7 @@
 
 
 
+ <script src="{{ STATIC_URL }}js/spot.js" ></script>
 
 
       	 {% endtimezone %}
