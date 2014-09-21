@@ -1,36 +1,29 @@
-$(function(){
-
-  var $container = $('#container'),
-      $checkboxes = $('#filters input');
-
-  $container.isotope({
-    itemSelector: '.item'
-   
-  });
-  // get Isotope instance
-  var isotope = $container.data('isotope');
-  // add even classes to every other visible item, in current order
-  function addEvenClasses() {
-    isotope.$filteredAtoms.each( function( i, elem ) {
-      $(elem)[ ( i % 2 ? 'addClass' : 'removeClass' ) ]('even')
-    });
+var $container = $("#container").isotope({
+  getSortData: {
+    date: '.date',
+    WVHT: '.WVHT',
   }
+});
+// sort items on button click
+$('#sorts').on( 'click', 'button', function() {
+  var sortByValue = $(this).attr('data-sort-by');
+  $container.isotope({ sortBy: sortByValue });
+});
 
-  $checkboxes.change(function(){
-    var filters = [];
-    // get checked checkboxes values
-    $checkboxes.filter(':checked').each(function(){
-      filters.push( this.value );
-    });
-    // ['.red', '.blue'] -> '.red, .blue'
-    filters = filters.join(', ');
-    $container.isotope({ filter: filters });
-    addEvenClasses();
-  });
 
-  $('#shuffle').click(function(){
-    $container.isotope('shuffle');
-    addEvenClasses();
-  });
+$('#filters').on('click', 'button', function(){
+
+	$container.isotope({
+  // filter element with numbers greater than 50
+  filter: function() {
+  	var filterByValue = $(this).attr('data-sort-by');
+    // `this` is the item element. Get text of element's .number
+    var number = $(this).find('.WVHT').text();
+    console.log(number);
+    // return true to show, false to hide
+    return parseInt( number, 10 ) > filterByValue;
+  }
+})
 
 });
+

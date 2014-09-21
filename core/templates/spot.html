@@ -18,12 +18,16 @@
     <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
 	
 		
-<div style= "visibilty:hidden" id="filters">
-  <input type="checkbox" name="red" value=".red" id="red"><label for="red">red</label>
-  <input type="checkbox" name="blue" value=".blue" id="blue"><label for="blue">blue</label>
-  <input type="checkbox" name="green" value=".green" id="green"><label for="green">green</label>
-  <input type="checkbox" name="yellow" value=".yellow" id="yellow"><label for="yellow">yellow</label>
-  <input type="checkbox" name="w-0.8" value=".w-0.8" id="w-0.8"><label for="w-0.8">w-0.8</label>
+<div id="sorts" class="button-group">
+  <button data-sort-by="date">date</button>
+  <button data-sort-by="WVHT">WVHT</button>
+
+</div>
+
+<div id="filters" class="button-group">
+  <button data-filter=".5">.5</button>
+  <button data-filter="1.0">1.0</button>
+
 </div>
 
 <p><button id="shuffle">Shuffle</button></p>
@@ -43,8 +47,8 @@
 
   
     <div class = "col-xs-12 col-md-4 item w-{{s.ForecastData.WVHT}}" data-category="transition" >
-      <img class = "responsive-image "  style = "width: 100%;" src=" {{s.url}}"  >
-     
+      <button id="shuffle"><img class = "responsive-image "  style = "width: 100%;" src=" {{s.url}}"  >
+     </button>
 
       	
 		<h2 class = "date">{{ s.ForecastData.date|localtime }} </h2>

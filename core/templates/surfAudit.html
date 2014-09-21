@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load tz %}
+		{% timezone "US/Pacific-New" %} 
+		
+
+
+<h1> Surf Audit </h1>
+<p>{{data}}</p>
+
+<table class = "table text-center">
+	<thead>
+		<th>Spot</th>
+		<th>Today's Forecast - as of yesterday</th>
+		<th>Today's Report - as of Today</th>
+		<th>Verdict</th>
+	</thead>
+
+
+
+	<tbody>
+		{% for a in data %}
+			
+		<tr>
+			{% for b in a %}
+			<td>{{b}}</td>
+			
+				{% endfor %}
+		</tr>
+	
+		{% endfor %}
+	</tbody>
+
+
+
+</table>
+
+
+
+      	 {% endtimezone %}
+{% endblock %}

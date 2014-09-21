@@ -10,6 +10,7 @@ from core.models import *
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from wbk2.tasks import getForecastData, getHeaderTitles, getAllData
+from wbk2 import kim
 import requests, re
 import datetime
 import calendar
@@ -101,6 +102,12 @@ def spotList (request):
 	context = RequestContext(request)
 	context["spots"] = Spot.objects.all()
 	return render_to_response("spotlist.html" , context)
+
+def surfAudit (request):
+	context = RequestContext(request)
+	context['data'] = kim.get_matches()
+	return render_to_response("surfAudit.html" , context)
+
 
 
 
