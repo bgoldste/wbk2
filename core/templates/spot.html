@@ -24,60 +24,58 @@
 	 </div>
 
 
-	 <div class="container">
+	 <div class="container-fluid" >
+   
+<div class = "row" id= "forecasts">
 
-
-<div class="row"><div class="col-xs-12 col-md-8">	
 	{% for s in images %}
  
-      <img class = "responsive-image" src=" {{s.url}}"  >
+
+  
+    <div class = "col-xs-12 col-md-4 item" >
+      <img class = "responsive-image "  style = "width: 100%;" src=" {{s.url}}"  >
      
 
       	
-		<h2>Taken on: {{ s.ForecastData.date|localtime }} </h2>
+		<h2 class = "date">{{ s.ForecastData.date|localtime }} </h2>
 	
 
 
-        <p>Wind Direction(Degrees from N): {{s.ForecastData.WDIR}} Windspeed:{{s.ForecastData.WSPD}} m/s <br>Wave Height:{{s.ForecastData.WVHT}}m Swell Angle: {{s.ForecastData.MWD}}  Period {{s.ForecastData.DPD}} seconds</p>
-      
-      </div>
-    </div>
+        <p>Wind Direction(Degrees from N): {{s.ForecastData.WDIR}} Windspeed:{{s.ForecastData.WSPD}} m/s <br>Wave Height:{{s.ForecastData.WVHT}}m Swell Angle: {{s.ForecastData.MWD}}  Period {{s.ForecastData.DPD}} seconds</p>      
+
+         <p class = "WVHT">{{s.ForecastData.WVHT}}</p>
+     
+   </div>
+
+  
   {% endfor %}
-		</div>
-<div class="col-xs-12 col-md-4">	
-	<h2>Recent Forecasts for {{spot}}</h2>
-		<table class="table-striped">
-
-	
-      <thead>
-
-        <tr>
-        	<th> Date </th>
-          <th>WDIR: </th>
-          <th>WSPD</th>
-          <th>WVHT</th>
-          <th>DPD</th>
-        </tr>
-      </thead>
-      <tbody>
-      		{% for a in data %}
-      		
-        <tr>
-        	<td>{{a.date}}</td>
-          <td>{{a.WDIR}}</td>
-          <td>{{a.WSPD}}</td>
-          <td>{{a.WVHT}}</td>
-          <td>{{a.DPD}}</td>
-        </tr>
-        	{% endfor %}
-   
-      </tbody>
-    </table>
-
-
 
 		</div>
-		</div> 
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       	 {% endtimezone %}

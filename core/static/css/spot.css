@@ -43,3 +43,21 @@ img {
 
 
 }
+.item {
+
+
+padding-bottom: 50px;
+padding-left: 50px;
+padding-right: 50px;
+padding-top: 50px;
+ 
+    
+
+}
+
+.item .col-xs-120 {
+    border: solid;
+}
+
+
+.item.w2 { width: 100%; }

@@ -5,6 +5,15 @@ import pytz
 from django.utils import timezone
 from core.models import ForecastData, Spot
 from django.core.exceptions import MultipleObjectsReturned
+import datetime
+import calendar
+from datetime import datetime
+import pytz
+from django.core.exceptions import MultipleObjectsReturned
+import time
+import requests, re
+from core.models import *
+
 
 def getAllData(Spot):
 	#returns split list of all data. will have to hardcode in length of line for now. Later pass it in
@@ -67,3 +76,90 @@ def convertDate(dataRow):
 	date = map(int,dataRow)
 	date = datetime(date[0],date[1],date[2],date[3],date[4],tzinfo=utc)
 	return (date)
+
+
+
+
+def getInstagram(spot):
+	
+	
+	spot = Spot.objects.get(name=spot)
+	
+
+	base_url = "https://api.instagram.com/v1/media/search"
+	max_timestamp = int(time.time())
+	distance = 5000
+	lat = spot.lat
+	lon = spot.lon
+
+	client_id="ad3fa66bd197402d98d490127e06d6d8"
+
+	url = "%s?max_timestamp=%s&distance=%s&lat=%s&lng=%s&client_id=%s" % (base_url, max_timestamp, distance, lat, lon, client_id)
+
+	data =requests.get(url).json()['data']
+	images = ()
+	dates = ()
+	count = 0
+	while len(images) < 50:
+		count += 1
+		#print "COUNT #" , count
+		print "max time" , max_timestamp
+		#print "len" , len(images)
+		url = "%s?max_timestamp=%s&distance=%s&lat=%s&lng=%s&client_id=%s" % (base_url, max_timestamp, distance, lat, lon, client_id)
+
+		data =requests.get(url).json()['data']
+
+		
+
+
+		for a in data:
+			#print "max_timestamp", max_timestamp, "created_time for current ", a["created_time"]
+			if max_timestamp > float(a["created_time"]):
+				#print "changing time stamp"
+				max_timestamp = a["created_time"]
+			#print "max-time" , max_timestamp
+			if a["caption"]:
+			#print a["caption"]['text'].encode('utf-8')
+		
+			#print a["link"]
+			#print '<img src="', str(a["images"]["standard_resolution"]['url']), '">'
+		
+				line = a["caption"]['text'].encode('utf-8')
+				searchObj = re.search( r'(surf)+', line)
+				if searchObj:
+					#print a["caption"]['text'].encode('utf-8')
+					#print a['link']
+					#print "searchObj.group() : ", searchObj
+					images += (a["images"]["standard_resolution"]['url'],)
+					ImageLink.objects.get_or_create( url =a["images"]["standard_resolution"]['url'], ForecastData= matchdate(a, spot))
+					
+
+	return 
+
+def matchdate(img, spot):
+	print "MATCHDATE CREATED TIME PULL" , img["created_time"]
+	img = int(img["created_time"])
+	print  datetime.utcfromtimestamp(img)
+	date = datetime.utcfromtimestamp(img).replace(tzinfo=pytz.UTC)
+
+
+	lte = ForecastData.objects.filter(spot= spot, date__lte=date).order_by('-date')
+	gte = ForecastData.objects.filter(spot = spot, date__gt=date).order_by('date')
+
+	if lte or gte:
+	   lte_obj =None
+	   gte_obj = None
+	   if not lte:
+	    	return gte[0]
+	   else:
+	      lte_obj = lte[0]
+
+	   if not gte:
+	      return lte[0]
+	   else:
+	      gte_obj = gte[0]
+	   import math
+	   timestamp_diff = abs(lte_obj.date - date) > abs(gte_obj.date- date)
+
+	   return  gte_obj if timestamp_diff else lte_obj
+	return  None
