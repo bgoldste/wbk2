@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from core.Models import ForecastData, Spot
+from core.models import ForecastData, Spot
 from wbk2.tasks import *
 
 class Command(BaseCommand):
