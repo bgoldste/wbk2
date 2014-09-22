@@ -81,8 +81,15 @@ def get_matches():
 					#print "MATCH" , k, v
 					#print "Today the report is" , b["date"], b["conditions"], b["wvht"]
 					#print "yesterday the forecast for ",  a["date"], "was : ", a["rating"] , a["wvht"],
-					
-					detail = (k, (a["rating"] + " " + a["wvht"] + " " +  a['date']), (b["conditions"] + " " + b["wvht"])  ) #spot, forecast, report 
+					forecast_rating =  a["rating"] 
+					report_rating = b["conditions"]
+
+
+					forecast_wvht = a["wvht"].replace("ft", " ")
+					report_wvht =  b["wvht"].replace("ft", "")
+
+
+					detail = (k, a["rating"],   forecast_wvht , b["conditions"] , report_wvht , report_rating == forecast_rating, report_wvht == forecast_wvht)   #spot, forecast, report 
 					matches.append(detail)
 			
 	return matches

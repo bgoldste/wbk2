@@ -5,17 +5,21 @@
 {% load tz %}
 		{% timezone "US/Pacific-New" %} 
 		
+	 <link href="{{ STATIC_URL }}css/surfaudit.css" rel="stylesheet">
 
 
 <h1> Surf Audit </h1>
 <p>{{data}}</p>
 
-<table class = "table text-center">
+<table class = "table table text-center">
 	<thead>
 		<th>Spot</th>
-		<th>Today's Forecast - as of yesterday</th>
-		<th>Today's Report - as of Today</th>
-		<th>Verdict</th>
+		<th>Today's Forecasted Rating</th>
+		<th>Today's Forecasted Wave Height</th>
+		<th>Today's Reported Rating</th>
+		<th>Today's Reported Wave Height</th>
+		<th>Conditions Match?</th>
+		<th>Wave Height Match?</th>
 	</thead>
 
 
@@ -25,9 +29,9 @@
 			
 		<tr>
 			{% for b in a %}
-			<td>{{b}}</td>
-			
-				{% endfor %}
+			<td class = "{{b}}">{{b}}</td>
+			{% endfor %}
+			<td ></td>
 		</tr>
 	
 		{% endfor %}
@@ -38,6 +42,6 @@
 </table>
 
 
-
+ <script src="{{ STATIC_URL }}js/surfaudit.js" ></script>
       	 {% endtimezone %}
 {% endblock %}
