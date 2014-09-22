@@ -100,7 +100,7 @@ def getInstagram(spot):
 	images = ()
 	dates = ()
 	count = 0
-	while len(images) < 50:
+	while len(images) < 150:
 		count += 1
 		#print "COUNT #" , count
 		print "max time" , max_timestamp

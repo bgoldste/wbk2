@@ -70,20 +70,16 @@ def get_matches():
 	total_matches = 0
 	matches = []
 	for a in get_today_forecast():
-		#print "using forecast" , a["url"]
+		
 		for b in all_reports:
-			#print "and report" , b['url']
+		
 			for k, v in spot_region_pairs.items():
-			#if a["url"].find(v) != 1:
-				#print "url match for a " , a["url"]
+			
 				if a["url"].find(v) != -1 and b["url"].find(k) != -1:
 					total_matches += 1
-					#print "MATCH" , k, v
-					#print "Today the report is" , b["date"], b["conditions"], b["wvht"]
-					#print "yesterday the forecast for ",  a["date"], "was : ", a["rating"] , a["wvht"],
+
 					forecast_rating =  a["rating"] 
 					report_rating = b["conditions"]
-
 
 					forecast_wvht = a["wvht"].replace("ft", " ")
 					report_wvht =  b["wvht"].replace("ft", "")
