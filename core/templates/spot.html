@@ -12,6 +12,7 @@
 	 <div >
 
 	 	<h1 class="text-center">{{spot}} </h1>
+
     <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
 </div>
 
@@ -124,7 +125,7 @@
 
 
  $.ajax({
-		  url: '/api/imagelink/?format=json&&ForecastData__spot=3&&limit=0',
+		  url: '/api/imagelink/?format=json&&ForecastData__spot=' + {{spot_id}} + '&&limit=0',
 		  type: 'GET',
 		  accepts: 'application/json',
 		  dataType: 'json',

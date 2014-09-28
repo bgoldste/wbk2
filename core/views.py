@@ -82,11 +82,11 @@ def SpotView(request, **kwargs):
 	try:
 		spot = Spot.objects.get(name=spot)
 		context["spot"] = (spot)
-	
-		data = ForecastData.objects.filter(spot = spot.id ).order_by("date")
+		context["spot_id"] = (spot.id)
+		#data = ForecastData.objects.filter(spot = spot.id ).order_by("date")
 
-		context["images"] = ImageLink.objects.filter(ForecastData__spot=spot.id).order_by("-ForecastData__date")
-		context["current_forecast"] = ForecastData.objects.filter(spot = spot.id ).order_by("-date")[0]
+		#context["images"] = ImageLink.objects.filter(ForecastData__spot=spot.id).order_by("-ForecastData__date")
+		#context["current_forecast"] = ForecastData.objects.filter(spot = spot.id ).order_by("-date")[0]
 
 		#context["data"] = data
 		
