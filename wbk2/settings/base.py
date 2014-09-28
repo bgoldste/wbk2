@@ -138,6 +138,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
 
     'core',
+    'tastypie',
 )
 
 EMAIL_SUBJECT_PREFIX = '[wbk2] '

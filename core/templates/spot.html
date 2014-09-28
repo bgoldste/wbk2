@@ -6,9 +6,6 @@
 		{% timezone "US/Pacific-New" %} 
 		
 	 <link href="{{ STATIC_URL }}css/spot.css" rel="stylesheet">
-	  
-
-
 
 
 
@@ -16,7 +13,12 @@
 
 	 	<h1 class="text-center">{{spot}} </h1>
     <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
-	
+</div>
+
+     <div class="container-fluid" id = "pictures" >
+
+     </div>
+	<!--
 		
 <div id="sorts" class="button-group">
   <button data-sort-by="date">date</button>
@@ -66,7 +68,7 @@
 
 		</div>
       </div>
-
+...-->
 
 
 
@@ -91,6 +93,64 @@
 
 
  <script src="{{ STATIC_URL }}js/spot.js" ></script>
+
+ <script id="pictureTemplate" type = "wbk2/template">
+
+<div class="col-xs-12 col-md-4 item "  >
+    <img class="responsive-image " style="width: 100%;" src="REPLACEME">
+   
+
+      	
+		<h2 class="date">DATEREPLACE</h2>
+	
+
+
+        <p>Wind Direction(Degrees from N): 290.0 Windspeed:1.0 m/s <br>Wave Height:1.2m Swell Angle: 269.0  Period 8.0 seconds</p>      
+
+         <p class="WVHT">1.2</p>
+     
+   </div>
+
+
+ </script>
+
+
+	 <script>
+	$(function() {
+
+	var $pictures = $("#pictures");
+	var template = $.trim ( $("#pictureTemplate").html() );
+	var frag = "";
+
+
+ $.ajax({
+		  url: 'http://localhost:8111/api/imagelink/?format=json&&ForecastData__spot=3&&limit=0',
+		  type: 'GET',
+		  accepts: 'application/json',
+		  dataType: 'json',
+		  success: function(data){
+		  		$.each(data.objects, function(i, picture) {
+
+		  			var temp = template. replace( /REPLACEME/ig, picture.url )
+		  				.replace( /DATEREPLACE/ig, picture.ForecastData.date)
+
+		  			;
+
+		  			frag += temp;
+		  				
+			   		//$pictures.append('<img src=" ' + picture.url + '"</img>');
+				}); //end each
+
+				$pictures.append(frag);
+			} //end succes function definition
+
+			 
+		  });//end a
+});
+
+	 </script>
+
+
 
 
       	 {% endtimezone %}

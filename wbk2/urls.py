@@ -3,8 +3,11 @@ from django.contrib import admin
 from core.views import *
 import core
 import settings
+from core.api import SpotResource, ImageLinkResource, ForecastDataResource
 
-
+spot_resource = SpotResource()
+image_link_resource = ImageLinkResource()
+forecast_data_resource = ForecastDataResource()
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -24,6 +27,12 @@ urlpatterns = patterns('',
     url(r'^surfaudit/$', surfAudit),
  	url(r'^spots/(?P<spot>[\w]{0,10})$', SpotView),
     url(r'^insc/(?P<spot>[\w]{0,10})$', InstaScraperView),
+    (r'^api/', include(spot_resource.urls)),
+     (r'^api/', include(image_link_resource.urls)),
+
+     (r'^api/', include(forecast_data_resource.urls)),
+
+
 
 )
 if settings.DEBUG:

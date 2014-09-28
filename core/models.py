@@ -58,7 +58,7 @@ class ImageData(models.Model):
 class ImageLink(models.Model):
 
 	url = models.TextField(unique=True)
-	ForecastData = models.ForeignKey(ForecastData, default=1, null=True)
+	ForecastData = models.ForeignKey(ForecastData, default=1, null=True, related_name="ForecastData")
 	
 	def __unicode__(self):
 		return  u'%s' % (self.url)
