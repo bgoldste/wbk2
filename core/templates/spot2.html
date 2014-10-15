@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load tz %}
+		{% timezone "US/Pacific-New" %} 
+		
+	 <link href="{{ STATIC_URL }}css/spot.css" rel="stylesheet">
+
+ <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular.js"></script>
+
+
+	 <div ng-app >
+
+	 	<h1 class="text-center">SPOT 2 View for : {{spot}} </h1>
+
+
+	 	<input type="text" ng-model="search" />
+ 
+    	 {% verbatim %} <h1>Hello let's look for {{search}}</h1> {% endverbatim %}
+
+    	 <br>
+    	 <br>
+
+    	 <div ng-controller="ImageController">
+		<div class="container-responsive"  >
+			<div class="row">
+    	 	<div class="col-xs-12 col-md-4 item "  >
+    	 	{% verbatim %}
+
+    	 		<div ng-repeat="entry in data">
+    	 			 <img class="responsive-image " style="width: 100%;" src="{{entry['url']}}">
+    	 			 <p>hi</p>
+
+    	 			</div>
+    	 		</div>
+    	 	</div>
+
+
+    	 		<h2 ng-repeat="entry in data"> {{entry["url"]}}</h2>
+
+
+
+    	 	<p> HI from controller  </p>
+    	 	<p> {{success}} </p>
+    	 	<p> {{data}} </p>
+    	 	<h2 ng-repeat="entry in data"> {{entry}}</h2>
+    	 	{% endverbatim %}
+
+    	 </div>
+
+
+
+
+
+
+
+    <h2 class="text-center">Current Forecast: {{current_forecast}}</h2>
+</div>
+
+
+
+
+
+
+     <div class="container-fluid" id = "pictures" >
+
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <script src="{{ STATIC_URL }}js/spot.js" ></script>
+
+<script>
+//gonna have to deal w/ how to pass spot id when its a separate js file...
+
+
+
+
+	console.log('/api/imagelink/?format=json&&ForecastData__spot=' + {{spot_id}} + '&&limit=0')
+
+
+
+function ImageController($scope, $http) {
+	$http.get('/api/imagelink/?format=json&&ForecastData__spot=' + {{spot_id}} + '&&limit=0').
+		success(function(data){
+			console.log("succes!!");
+			console.log(data);
+			$scope.success = "data= " + data;
+			$scope.data =  data['objects'];
+
+
+		});
+}
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+ <script id="pictureTemplate" type = "wbk2/template">
+
+<div class="col-xs-12 col-md-4 item "  >
+    <img class="responsive-image " style="width: 100%;" src="REPLACEME">
+   
+
+      	
+		<h2 class="date">DATEREPLACE</h2>
+	
+
+
+        <p>Wind Direction(Degrees from N): 290.0 Windspeed:1.0 m/s <br>Wave Height:1.2m Swell Angle: 269.0  Period 8.0 seconds</p>      
+
+         <p class="WVHT">1.2</p>
+     
+   </div>
+
+
+ </script>
+
+
+	 <script>
+	$(function() {
+
+	var $pictures = $("#pictures");
+	var template = $.trim ( $("#pictureTemplate").html() );
+	var frag = "";
+
+
+ $.ajax({
+		  url: '/api/imagelink/?format=json&&ForecastData__spot=' + {{spot_id}} + '&&limit=0',
+		  type: 'GET',
+		  accepts: 'application/json',
+		  dataType: 'json',
+		  success: function(data){
+		  		$.each(data.objects, function(i, picture) {
+
+		  			var temp = template. replace( /REPLACEME/ig, picture.url )
+		  				.replace( /DATEREPLACE/ig, picture.ForecastData.date)
+
+		  			;
+
+		  			frag += temp;
+		  				
+			   		//$pictures.append('<img src=" ' + picture.url + '"</img>');
+				}); //end each
+
+				$pictures.append(frag);
+			} //end succes function definition
+
+			 
+		  });//end a
+});
+
+	 </script>
+
+
+
+
+      	 {% endtimezone %}
+{% endblock %}

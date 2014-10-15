@@ -74,6 +74,21 @@ class AddSpotView(SuccessMessageMixin, CreateView):
         return self.success_message 
 
 
+def SpotView2(request, **kwargs):
+	context = RequestContext(request)
+	spot = kwargs.get("spot") 	
+
+	try:
+		spot = Spot.objects.get(name=spot)
+		context["spot"] = (spot)
+		context["spot_id"] = (spot.id)
+		
+		return render_to_response('spot2.html', context)
+
+	except Spot.DoesNotExist:
+		context["spot"] = "No spot with that name exists."
+		return render_to_response('nospot.html', context)
+	#except IndexError:
 
 def SpotView(request, **kwargs):
 	context = RequestContext(request)
